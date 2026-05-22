@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("products")
@@ -18,8 +19,11 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/")
-    public ResponseEntity<Page<ProductMinDto>> findAll(Pageable pageable) {
-        Page<ProductMinDto> result =  productService.findAll(pageable);
+    public ResponseEntity<Page<ProductMinDto>> findAll(
+            Pageable pageable,
+            @RequestParam(defaultValue = "") String name
+    ) {
+        Page<ProductMinDto> result =  productService.findAll(pageable, name);
         return ResponseEntity.ok(result);
     }
 

@@ -1,7 +1,6 @@
 package com.netoptc.DsCommerce.entities;
 
 
-import com.netoptc.DsCommerce.utils.OrderItemKey;
 import jakarta.persistence.*;
 
 

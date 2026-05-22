@@ -15,8 +15,8 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
 
-    public Page<ProductMinDto> findAll(Pageable pageable) {
-        Page<Product> result = productRepository.findAll(pageable);
+    public Page<ProductMinDto> findAll(Pageable pageable, String name) {
+        Page<Product> result = productRepository.findAllByName(pageable, name);
         return  result.map(ProductMinDto::new);
     }
 

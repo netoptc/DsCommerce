@@ -1,4 +1,4 @@
-package com.netoptc.DsCommerce.utils;
+package com.netoptc.DsCommerce.entities;
 
 
 import jakarta.persistence.Embeddable;
