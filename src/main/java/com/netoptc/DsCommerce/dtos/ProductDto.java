@@ -2,25 +2,28 @@ package com.netoptc.DsCommerce.dtos;
 
 import com.netoptc.DsCommerce.entities.Product;
 
-public class ProductMinDto {
+public class ProductDto {
 
     private Long id;
     private String name;
+    private String description;
     private Double price;
     private String imgUrl;
 
-    public ProductMinDto(Long id, String name, String imgUrl, Double price) {
+    public ProductDto(Long id, String name, String imgUrl, Double price) {
         this.id = id;
         this.name = name;
         this.imgUrl = imgUrl;
         this.price = price;
     }
 
-    public ProductMinDto(Product entity) {
+
+    public ProductDto(Product entity) {
         this.id = entity.getId();
         this.name = entity.getName();
-        this.imgUrl = entity.getImgUrl();
+        this.description = entity.getDescription();
         this.price = entity.getPrice();
+        this.imgUrl = entity.getImgUrl();
     }
 
     public Long getId() {
@@ -31,6 +34,8 @@ public class ProductMinDto {
         return name;
     }
 
+    public String getDescription() { return description; }
+
     public String getImgUrl() {
         return imgUrl;
     }
@@ -38,4 +43,5 @@ public class ProductMinDto {
     public Double getPrice() {
         return price;
     }
+
 }
