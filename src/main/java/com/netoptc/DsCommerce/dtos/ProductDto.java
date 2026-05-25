@@ -1,7 +1,10 @@
 package com.netoptc.DsCommerce.dtos;
 
 import com.netoptc.DsCommerce.entities.Product;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,12 +13,18 @@ import java.util.stream.Collectors;
 public class ProductDto {
 
     private Long id;
+
+    @Length(min = 3, max = 80, message = "Nome deve ter entre 3 e 80 caracteres")
     private String name;
+
+    @Length(min = 10, message = "Descrição não pode ter menos que 10 caracteres")
     private String description;
 
-    @Positive(message = "Campo preço deve ser maior que zero")
+    @Positive(message = "preço deve ser maior que zero")
     private Double price;
     private String imgUrl;
+
+    @NotEmpty(message = "Deve haver pelo menos uma categoria")
     private Set<CategoryDto> categories = new HashSet<>();
 
 
