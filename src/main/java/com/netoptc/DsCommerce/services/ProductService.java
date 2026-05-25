@@ -58,7 +58,6 @@ public class ProductService {
 
 
     public ProductDto update(Long id, ProductDto dto) {
-
         Product product = productRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
 
         product.setName(dto.getName());
