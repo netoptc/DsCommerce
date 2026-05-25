@@ -32,7 +32,7 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<ResponseErrorDto> handlerResourceNotFound(BadRequestException e, HttpServletRequest request) {
-        HttpStatus status = HttpStatus.NOT_FOUND;
+        HttpStatus status = HttpStatus.BAD_REQUEST;
         ResponseErrorDto error = new ResponseErrorDto(Instant.now(), request.getRequestURI(), status.value(), e.getMessage() );
         return ResponseEntity.status(status).body(error);
     }

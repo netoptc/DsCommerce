@@ -5,9 +5,11 @@ import com.netoptc.DsCommerce.dtos.ProductDto;
 import com.netoptc.DsCommerce.dtos.ProductMinDto;
 import com.netoptc.DsCommerce.entities.Category;
 import com.netoptc.DsCommerce.entities.Product;
+import com.netoptc.DsCommerce.exceptions.BadRequestException;
 import com.netoptc.DsCommerce.exceptions.ResourceNotFoundException;
 import com.netoptc.DsCommerce.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -77,6 +79,15 @@ public class ProductService {
         productRepository.save(product);
 
         return new ProductDto(product);
+    }
+
+    public void delete(Long id) {
+        Product product = productRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        try {
+            productRepository.delete(product);
+        }  catch (DataIntegrityViolationException e) {
+            throw new BadRequestException("Falha de integridade referencial");
+        }
     }
 
 }
