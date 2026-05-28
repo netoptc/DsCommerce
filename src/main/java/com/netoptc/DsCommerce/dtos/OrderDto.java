@@ -19,6 +19,8 @@ public class OrderDto {
     @NotEmpty(message = "Deve ter pelo menos um item")
     private List<OrderItemDto> items = new ArrayList<>();
 
+    public OrderDto() {}
+
     public OrderDto(Long id, Instant moment, OrderStatus status, ClientDto client, PaymentDto paymentDto) {
         this.id = id;
         this.moment = moment;
@@ -32,7 +34,7 @@ public class OrderDto {
         this.moment = entity.getMoment();
         this.status =  entity.getStatus();
         this.client = new ClientDto(entity.getClient());
-        this.paymentDto = new PaymentDto(entity.getPayment());
+        this.paymentDto = entity.getPayment() != null ? new PaymentDto(entity.getPayment()) : null;
         for (OrderItem orderItem : entity.getOrderItems()) {
             items.add(new OrderItemDto(orderItem));
         }

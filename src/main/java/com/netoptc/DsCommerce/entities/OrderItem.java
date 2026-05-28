@@ -1,6 +1,7 @@
 package com.netoptc.DsCommerce.entities;
 
 
+import com.netoptc.DsCommerce.dtos.OrderItemDto;
 import jakarta.persistence.*;
 
 
@@ -22,6 +23,16 @@ public class OrderItem {
 
     private Integer quantity;
     private Double price;
+
+    public OrderItem() {}
+
+    public OrderItem(Order order, Product product, Integer quantity, Double price) {
+        this.id = new OrderItemKey(product.getId(), order.getId());
+        this.order = order;
+        this.product = product;
+        this.quantity = quantity;
+        this.price = price;
+    }
 
     public OrderItemKey getId() {
         return id;
